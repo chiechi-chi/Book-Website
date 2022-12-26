@@ -1,0 +1,45 @@
+﻿@model Account
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="shop login section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 offset-lg-3 col-12">
+					<div class="login-form">
+						<h1>Login</h1>
+
+						<form class="form" method="post" asp-controller="Accounts" asp-action="Login">
+							<div class="row">
+							@if (ViewBag.error != null)
+							{
+								<h4 style="color:red">@ViewBag.error</h4>
+							}
+							<div class="col-12">
+									<div class="form-group">
+									<label asp-for="Username"></label>
+									<input asp-for="Username" class="form-control" />
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="form-group">
+									<label asp-for="Password"></label>
+									<input asp-for="Password" class="form-control" />
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="form-group login-btn">
+									<button class="btn" type="submit">Login</button>
+										<a asp-controller="Accounts" asp-action="Register" class="btn">Register</a>
+									</div>
+								</div>
+							<h3 style="color:red"> @ViewBag.ThongBao </h3>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>

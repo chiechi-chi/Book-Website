@@ -1,0 +1,160 @@
+﻿@model IEnumerable<Cart>
+@inject IHttpContextAccessor Accessor
+
+@{
+    var IdUser = Accessor.HttpContext.Session.GetInt32("Id");
+    var userName = Accessor.HttpContext.Session.GetString("userName");
+    var avatar = Accessor.HttpContext.Session.GetString("avatar");
+    var itemCount = Accessor.HttpContext.Session.GetInt32("itemCount");
+    var checkIsAdmin = Accessor.HttpContext.Session.GetInt32("CheckIsAdmin");
+    var info = Accessor.HttpContext.Request.Cookies["info"];
+    Product product = new Product();
+}
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+	var total = 0;
+	var flag = 0;
+	bool checkStock = true;
+}
+<div class="shopping-cart section">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<table class="table shopping-summery">
+						<thead>
+							<tr class="main-hading">
+								<th>PRODUCT</th>
+								<th>NAME</th>
+								<th class="text-center">PRICE</th>
+								<th class="text-center">QUANTITY</th>
+								<th class="text-center">TOTAL</th>
+							</tr>
+						</thead>
+						<tbody id="tbody">
+						@if (Model != null)
+						{
+							foreach (var items in Model)
+							{
+								flag++;
+								if(items.Quantity<=items.Product.Stock){
+								total += (items.Product.Price * items.Quantity);
+								}
+								<tr>
+									<td class="image" data-title="No"><img src="~/assets/images/products/@items.Product.Image" width="150" height="200" alt="#"></td>
+									<td class="product-des" data-title="Description" style="width:40%">
+										<p class="product-name">
+											<a asp-controller="Products" asp-action="Details" asp-route-id="@items.ProductId">@items.Product.Name</a>
+											@if(items.Product.Stock==0){
+												checkStock = false;
+												<p style="color:red">Sản phẩm đã hết hàng. Vui lòng xóa sản phẩm để có thể thanh toán !</p>
+											}
+											else if(items.Quantity>items.Product.Stock){
+												checkStock = false;
+											<p style="color:red">Chỉ còn @(items.Product.Stock) sản phẩm. Vui lòng xóa bớt sản phẩm để có thể thanh toán !</p>
+											}
+										</p>
+									</td>
+									<td class="price" data-title="Price"><span>@items.Product.Price </span></td>
+									<td class="qty" data-title="Qty">
+										<div class="input-group">
+											<div class="button minus">
+													@if (items.Quantity == 1) {
+														<a OnClick="return confirm('Bạn có chắc muốn xóa không ?');" style="padding:20px;line-height:50px" asp-controller="Carts" asp-action="Minus" asp-route-idCart="@items.Id">
+															<i class="ti-minus"></i>
+														</a>
+													}
+													else
+													{
+														<a style="padding:20px;line-height:50px" asp-controller="Carts" asp-action="Minus" asp-route-idCart="@items.Id">
+															<i class="ti-minus"></i>
+														</a>
+													}
+											</div>
+											<input type="text" id="value[@items.Id]" class="input-number" disabled="disabled" value="@items.Quantity">
+											<div class="button plus">
+													<a style="padding:20px;line-height:50px" asp-action="Plus" asp-route-idCart="@items.Id">
+														<i class="ti-plus"></i>
+													</a>
+											</div>
+										</div>
+									</td>
+									<td class="total-amount" data-title="Total"><span>@(
+									items.Product.Price * items.Quantity
+									)</span></td>
+									<td class="action" data-title="Remove">
+										<form asp-controller="Carts" asp-action="RemoveCart" asp-route-idCart="@items.Id" OnClick="return confirm('Bạn chắc chắn muốn xóa không ?');">
+											<button class="btn btn-danger">Xóa</button>
+										</form>
+									</td>
+								</tr>
+							}
+							@if (flag == 0)
+							{
+								<tr><td style="color:red;font-size:18px">Không có sản phẩm nào</td></tr>
+							}
+						}
+					</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="total-amount">
+						<div class="row">
+							<div class="col-lg-8 col-md-5 col-12">
+							</div>
+							
+							<div class="col-lg-4 col-md-7 col-12">
+							@if (flag > 0)
+							{
+								<div class="button5 text-right" style="margin:-30px 30px 20px 30px;color:red">
+									<form asp-controller="Carts" asp-action="RemoveAll" OnClick="return confirm('Bạn có chắc muốn xóa hết không ?');">
+									<button class="btn" >Remove All</button>
+									</form>
+								</div>
+								<div class="right">
+									<ul>
+										<li>Total: <span>@total.ToString("#0,#00") VNĐ</span></li>
+									</ul>
+									<div class="btn btn-warning">
+										<a style="color:white;" asp-controller="Products" asp-action="Index" class="btn">Continue shopping</a>
+									</div>
+								</div>
+							}
+							else
+							{
+								<div class="right">
+									<div>
+										<a asp-controller="Products" asp-action="Index" class="btn btn-success">Continue shopping</a>
+									</div>
+								</div>
+								
+							}
+							<br />
+							@if (IdUser != null)
+							{
+								<td>
+									<a class="btn btn-success" asp-action="Purchase">Thanh toán</a>
+								</td>
+								<br />
+								<br />
+								<td>
+								
+									<form class="btn btn-primary" asp-controller="Carts" asp-action="RemoveAll" OnClick="return confirm('Bạn có chắc muốn xóa hết không ?');">
+									<button class="btn" >Remove All</button>
+									</form>
+								
+								</td>
+							}
+						</div>
+						</div>
+					</div>
+					<!--/ End Total Amount -->
+				</div>
+			</div>
+		</div>
+	</div>

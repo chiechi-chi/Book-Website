@@ -1,0 +1,98 @@
+﻿<div class="side-nav">
+    <div class="side-nav-inner">
+        <ul class="side-nav-menu scrollable">
+            <li class="nav-item">
+                <a class="dropdown-toggle" asp-area="Admin" asp-controller="Home" asp-action="Index">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-dashboard"></i>
+                    </span>
+                    <span class="title">Dashboard</span>
+                    <span class="arrow">
+                        <i class="arrow-icon"></i>
+                    </span>
+                </a>
+
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-build"></i>
+                    </span>
+                    <span class="title">Quản lý sản phẩm</span>
+                    <span class="arrow">
+                        <i class="arrow-icon"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">         
+                    <li>
+                        <a asp-area="Admin" asp-controller="Products" asp-action="Index">Quản lý sản phẩm</a>
+                    </li>
+                    <li>
+                        <a asp-area="Admin" asp-controller="ProductTypes" asp-action="Index">Quản lý loại sản phẩm</a>
+                    </li>
+                </ul>
+            </li>
+      
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-form"></i>
+                    </span>
+                    <span class="title">Quản lý doanh số</span>
+                    <span class="arrow">
+                        <i class="arrow-icon"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="form-elements.html">1</a>
+                    </li>
+                    <li>
+                        <a href="form-layouts.html">2</a>
+                    </li>
+                    <li>
+                        <a href="form-validation.html">3</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-table"></i>
+                    </span>
+                    <span class="title">Quản lý hệ thống</span>
+                    <span class="arrow">
+                        <i class="arrow-icon"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a asp-area="Admin" asp-controller="Accounts" asp-action="Index">Quản lý tài khoản</a>
+                    </li>
+                </ul>
+            </li>
+        
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-lock"></i>
+                    </span>
+                    <span class="title">Quản lý hóa đơn</span>
+                    <span class="arrow">
+                        <i class="arrow-icon"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a asp-area="Admin" asp-controller="Invoices" asp-action="Index">Quản lý hóa đơn</a>
+                    </li>
+                    <li>
+                        <a asp-area="Admin" asp-controller="InvoiceDetails" asp-action="Index">Quản lý chi tiết hóa đơn</a>
+                    </li>
+                    
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

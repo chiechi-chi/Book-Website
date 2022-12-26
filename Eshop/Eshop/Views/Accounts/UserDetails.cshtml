@@ -1,0 +1,74 @@
+﻿@model Account
+@{
+    ViewData["Title"] = "UserDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="containerUser mainUser">
+    <div class="leftItem">
+        <div class="borderItem">
+            <div class="border first">
+                <a asp-action="UserDetails"><div class="items"><i class="fa-solid fa-user" style="padding-right:10px;"></i>Tài khoản</div></a>
+            </div>
+        </div>
+    </div>
+    <div class="rightItem">
+        <div>
+            <h4>Tổng Quan</h4>
+            <div class="containerUser info">
+                <div class="item">
+                    <div class="title">Tên Đăng nhập<span class="data">@Model.Username</span></div>
+                    
+                </div>
+                <div class="item">
+                    <div class="title">Email: <span id="email" class="data">@Model.Email</span></div>
+                   
+                </div>
+                <div class="item">
+                    <div class="title">Họ và tên: <span class="data">@Model.FullName</span></div>               
+                </div>
+            </div>
+        </div>
+        <div class="line"></div>
+        
+        <div class="line"></div>
+        <form class="Edit" asp-action="UserDetails">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Email" />
+            <input type="hidden" asp-for="Username" />
+            <input type="hidden" asp-for="Avatar" />
+            <input type="hidden" asp-for="Password" />
+            <input type="hidden" asp-for="IsAdmin" />
+            <input type="hidden" asp-for="Status" />
+            <fieldset>
+                <h4>Thay đổi thông tin</h4>
+                <div class="editU">
+                    <label asp-for="FullName"></label>
+                    <input asp-for="FullName">
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+                <div class="editU">
+                    <label asp-for="Phone"></label>
+                    <input asp-for="Phone">
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+                <div class="editU">
+                    <label asp-for="Address"></label>
+                    <input asp-for="Address">
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+              
+            </fieldset>
+
+            <label class="check">
+                <input type="checkbox" name="public" value="1" checked>
+                <div>Đồng ý lưu thông tin</div>
+            </label>
+            <button type="submit" class="btn">Save</button>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

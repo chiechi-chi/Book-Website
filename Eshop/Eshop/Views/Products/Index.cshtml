@@ -1,0 +1,131 @@
+﻿@model IEnumerable<Eshop.Models.Product>
+@{
+    var flag = 0;
+    Product product = new Product();
+}
+<main class="main-content">
+    <div>
+        <div class="container h-100 mt-6">
+            <div class="row h-100">
+                <div class="col-lg-12">
+                    <div class="section-title text-center pb-55">
+                        <span class="sub-title text-primary">This is</span>
+                        <h1 class="title mb-0">My Products</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shop-area section-space-y-axis-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 order-lg-1 order-2 pt-10 pt-lg-0">
+                    <div class="sidebar-area">
+                        <div class="widgets-searchbox mb-9">
+                            <form method="get" asp-action="Index">
+                                <input class="input-field" value="@ViewData["GetSearch"]" name="SearchString" type="search" placeholder="Search">
+                                <button class="widgets-searchbox-btn" type="submit">
+                                    <i class="pe-7s-search"></i>
+                                </button>
+                            </form>                        
+                        </div>
+                        <div class="widgets-searchbox mb-9">
+                            <form asp-action="Index">
+                                @foreach (var item in ViewBag.loadNamePType)
+                                {
+                                    <li class="categories-item"><button type="submit" class="btn" name="product.ProductTypeId" value="@item.Id">@item.Name</button></li>
+                                }
+                            </form>
+                        </div>
+                       
+
+                    </div>
+                </div>
+
+
+                <div class="col-lg-9 order-lg-2 order-1">
+                    <div class="product-topbar">
+                        <ul>
+                            <li class="product-view-wrap">
+                                <ul class="nav" role="tablist">
+                                    <li class="grid-view" role="presentation">
+                                        <a class="active" id="grid-view-tab" data-bs-toggle="tab" href="#grid-view" role="tab" aria-selected="true">
+                                            <i class="fa fa-th"></i>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
+                            </li>
+                           
+                            <li class="short">
+                                <select class="nice-select wide rounded-0">
+                                    <option value="1">Sort by Default</option>
+                                    
+                                </select>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="tab-content text-charcoal pt-8">
+                        <div class="tab-pane fade show active" id="grid-view" role="tabpanel" aria-labelledby="grid-view-tab">
+                            <div class="product-grid-view row">
+                                @foreach (var item in Model)
+                                {
+                                    <div class="col-lg-4 col-sm-6">
+                                        <div class="product-item">
+                                            <div class="product-img img-zoom-effect">
+                                                <a asp-action="Details" asp-route-id="@item.Id">
+                                                    <img  class="img-full" src="~/assets/images/products/@item.Image" alt="Product Images">
+                                                </a>
+                                                <div class="product-add-action">
+                                                    <div style="background:green;">
+                                                        @if (item.Stock > 0)
+                                                        {
+                                                            <form asp-controller="Carts" asp-action="Index" asp-route-ProductId="@item.Id">
+                                                                <button style="color:white;border:none;background:none;font-weight:600;font-size:15px;outline:none;" title="ADD TO CART">ADD TO CART</button>
+                                                            </form>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a style="background:none;font-weight:600;font-size:15px">ADD TO CART</a>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product-content">
+                                                <a class="product-name" href="single-product.html">@item.Name</a>
+                                                <div class="price-box pb-1">
+                                                    <span class="new-price">@item.Price</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                              
+                              
+                            </div>
+                        </div>                  
+                    <div class="pagination-area pt-10">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span class="fa fa-chevron-left"></span>
+                                    </a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span class="fa fa-chevron-right"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

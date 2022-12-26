@@ -1,0 +1,92 @@
+﻿@model Account
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="shop login section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 offset-lg-3 col-12">
+					<div class="login-form">
+						<h1>Register</h1>
+						
+
+						<form class="form" method="post" asp-controller="Accounts" asp-action="Register">
+							<div class="row">
+								<div class="col-12">
+									<div class="form-group">
+									@if (ViewBag.errorUserName != null)
+									{
+										<span style="color:red;display:block">@ViewBag.errorUserName</span>
+									}
+										<label>User Name<span>*</span></label>
+									
+										<input asp-for="Username" placeholder="" required="required">
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="form-group">
+									@if (ViewBag.errorEmail != null)
+									{
+										<span style="color:red;display:block">@ViewBag.errorEmail</span>
+									}
+										<label>Your Email<span>*</span></label>
+									
+										<input asp-for="Email" placeholder="" required="required">
+									</div>
+								</div>
+							<div class="col-12">
+								<div class="form-group">
+									<label>Full Name<span>*</span></label>
+									<input asp-for="FullName" placeholder="" required="required">
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="form-group">
+									<label>Your Phone Number<span>*</span></label>
+									<input asp-for="Phone" placeholder="" required="required">
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="form-group">
+									<label>Your Address<span>*</span></label>
+									<input asp-for="Address" placeholder="" required="required">
+								</div>
+							</div>
+								<div class="col-12">
+									<div class="form-group">
+										<label>Your Password<span>*</span></label>
+										<input asp-for="Password" placeholder="" required="required">
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="form-group">
+									@if (ViewBag.error != null)
+									{
+										<span style="color:red;display:block">@ViewBag.error</span>
+									}
+										<label>Confirm Password<span>*</span></label>
+										<input type="password" name="ConfirmPassword" placeholder="" required="required">
+									</div>
+								</div>
+							<div class="col-12">
+								<div class="form-group">
+									<label>Avatar<span>*</span></label>
+									<input asp-for="Avatar" placeholder="" required="required">
+								</div>
+							</div>
+							
+								<div class="col-12">
+									<div class="form-group login-btn">
+										<button class="btn btn-success" type="submit">Register</button>
+									</div>
+								
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+

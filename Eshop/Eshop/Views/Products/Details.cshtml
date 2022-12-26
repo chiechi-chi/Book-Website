@@ -1,0 +1,56 @@
+﻿@model Eshop.Models.Product
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Chi tiết sản phẩm</h1>
+
+<div>
+    <h4>Sản phẩm</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProductType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ProductType.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+        <dd class = "col-sm-10">
+            <img src="~/assets/images/products/@Model.Image" , style="width:200px">
+        </dd>
+    </dl>
+    <form asp-controller="Carts" asp-action="Index" asp-route-productId="@Model.Id">
+        <div class="form-group col-md-2">
+            <label for="quantity">Số lượng</label>
+            <input type="number" value="1" min="1" name="Quantity" id="quantity" class="col-8"/>
+        </div>
+        <button class="btn btn-success mt-2">Thêm vào giỏ hàng</button>
+    </form>
+</div>
+<div>
+@*    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |*@
+    <a class="mt-2" asp-action="Index">Back to List</a>
+</div>
